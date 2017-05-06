@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
+        //para la inyeccion de dependencias
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -16,9 +17,31 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        //repositorio para trabajar con dbflow que es nuestro gestor de recetas ORM
+        maven{ url "https://jitpack.io"}
+
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+ext {
+    minSdkVersion = 16
+    targetSdkVersion = 25
+    compileSdkVersion = 25
+    buildToolsVersion = "25.0.0"
+
+    supportLibraryVersion = '25.3.1'
+
+    retrofitVersion = '2.2.0'
+    //version de ORM con anotaciones
+    dbflowVersion = '4.0.0-beta7'
+    butterknifeVersion = '8.5.1'
+    butterknifeCompiler = '8.5.1'
+    facebookVersion = '[4,5)'
+    eventbusVersion = '3.0.0'
+    daggerVersion = '2.10'
+    glideVersion = '3.7.0'
+    jsr250Version = '1.0'
 }

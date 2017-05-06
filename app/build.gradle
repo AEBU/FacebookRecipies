@@ -1,12 +1,19 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+repositories{
+    mavenCentral()
+}
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "lex.uce.edu.facebookrecipieslex"
-        minSdkVersion 16
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,6 +22,26 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //se va a crear un string que tienen el nombre y el valor seguido
+            resValue "string", "FACEBOOK_PROVIDER_AUTH", project.property('FACEBOOK_PROVIDER') + project.property('FACEBOOK_APP_ID')
+            resValue "string", "FACEBOOK_APP_ID", project.property('FACEBOOK_APP_ID')
+            //es decirq ue se va apoder acceder desde el codigo con esta clase como una variable estaticax
+            buildConfigField "String", "FOOD_API_KEY", project.property('FOOD_API_KEY')
+            //al hacer un deploy, de la aplicacion esto hay que tener en cuanta que no tiene que ser humanredeable no lo puede leer una person
+            //una persona va a hacer un decompile esto para que no se pueda obtener estas ids
+
+        }
+
+        /*aqui agregamos un tipo de debug para especificar las varibales que necesitamos
+        * vamos a ponerlo en release para que nos quede listo cuando los publicquemos
+         *3 variables , 2 son un rest value porque van a manifest, provider, apikey
+         * y la api key que va a ir como un build config
+         *
+         * */
+        debug{
+            resValue "string", "FACEBOOK_PROVIDER_AUTH", project.property('FACEBOOK_PROVIDER') + project.property('FACEBOOK_APP_ID')
+            resValue "string", "FACEBOOK_APP_ID", project.property('FACEBOOK_APP_ID')
+            buildConfigField "String", "FOOD_API_KEY", project.property('FOOD_API_KEY')
         }
     }
 }
@@ -24,6 +51,42 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
+
+    //compile 'com.android.support:appcompat-v7:25.1.0'
+//    androidTestCompile 'com.android.support:support-annotations:25.3.1'
+//    androidTestCompile 'com.android.support.test:runner:0.5'
+//    androidTestCompile 'com.android.support.test:rules:0.5'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.2'
+//    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+
+
     testCompile 'junit:junit:4.12'
+
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+
+    compile "com.facebook.android:facebook-android-sdk:$rootProject.ext.facebookVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+
+    compile "org.greenrobot:eventbus:$rootProject.ext.eventbusVersion"
+
+    annotationProcessor  "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
+    compile "javax.annotation:jsr250-api:$rootProject.ext.jsr250Version"
+    compile "com.google.dagger:dagger:$rootProject.ext.daggerVersion"
+//    compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
+
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.ext.dbflowVersion"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.ext.dbflowVersion"
+    compile "com.github.Raizlabs.DBFlow:dbflow:$rootProject.ext.dbflowVersion"
+
+
 }
