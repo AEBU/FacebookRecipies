@@ -15,7 +15,7 @@ import java.lang.annotation.Documented;
  * y vamos a usar el metodoo initfFacebbok
  * con lo que se realizara el iniciializacion del facebook y vamos a iniciar nuestro DBFLow
  *
- *
+ *https://www.youtube.com/watch?v=UveI8_wfEoU
  */
 
 public class FacebookRecipesApp extends Application {
