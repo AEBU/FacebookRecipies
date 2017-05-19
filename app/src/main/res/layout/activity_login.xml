@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- este conteiner va a poder mostrar snackbars-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -10,8 +11,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="lex.uce.edu.facebookrecipieslex.LoginActivity">
 
-    <TextView
+
+    <!--Centrado en su ancestro-->
+    <com.facebook.login.widget.LoginButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/btnLogin"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>
