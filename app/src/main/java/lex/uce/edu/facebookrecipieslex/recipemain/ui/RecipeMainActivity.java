@@ -1,7 +1,9 @@
-package lex.uce.edu.facebookrecipieslex;
+package lex.uce.edu.facebookrecipieslex.recipemain.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import lex.uce.edu.facebookrecipieslex.R;
 
 public class RecipeMainActivity extends AppCompatActivity {
 
